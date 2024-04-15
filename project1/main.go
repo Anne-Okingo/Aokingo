@@ -26,9 +26,11 @@ func main() {
 	HexResult := mine.Hex(atoanresult)
 	binResult := mine.Bin(HexResult)
 	capResult := mine.Cap(binResult)
+	upResult := mine.Up(capResult)
+	lowResult := mine.Low(upResult)
 
 	// writting the modufied input text in the output file
-	err = os.WriteFile(outputFile, []byte(capResult), 0o644)
+	err = os.WriteFile(outputFile, []byte(lowResult), 0o644)
 	if err != nil {
 		fmt.Print("Error writting output file", err)
 		return
