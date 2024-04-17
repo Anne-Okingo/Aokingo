@@ -11,14 +11,13 @@ func Cap(str string) string {
 		if strings.Contains(words[i], "(cap") {
 			if strings.Contains(words[i], "(cap,") {
 				num, _ := strconv.Atoi(words[i+1][:len(words[i+1])-1])
-				for j := i-num; j < i; j++ {
+				for j := i - num; j < i; j++ {
 					words[j] = strings.Title(words[j])
 				}
 				words = append(words[:i], words[i+2:]...)
-			} else {
-				words[i-1] = strings.Title(words[i-1])
-				words = append(words[:i], words[i+1:]...)
 			}
+			words[i-1] = strings.Title(words[i-1])
+			words = append(words[:i], words[i+1:]...)
 		}
 	}
 	return strings.Join(words, " ")

@@ -12,8 +12,8 @@ func Hex(str string) string {
 		if words[i] == "(hex)" && i > 0 {
 			num, _ := strconv.ParseInt(words[i-1], 16, 64)
 			words[i-1] = fmt.Sprint(num)
+			words = append(words[:i], words[i+1:]...)
 		}
-		words = append(words[:i], words[i+1:]...)
 	}
 	return strings.Join(words, " ")
 }

@@ -22,17 +22,20 @@ func main() {
 	filecontent := string(content)
 	// to modify out input text
 
-	atoanresult := mine.AToAn(filecontent)
+	capResult := mine.Cap(filecontent)
+	atoanresult := mine.AToAn(capResult)
 	HexResult := mine.Hex(atoanresult)
 	binResult := mine.Bin(HexResult)
-	capResult := mine.Cap(binResult)
-	upResult := mine.Up(capResult)
+	upResult := mine.Up(binResult)
 	lowResult := mine.Low(upResult)
+	puncResult := mine.Punc(lowResult)
+	apostResult := mine.Apostrophe(puncResult)
 
 	// writting the modufied input text in the output file
-	err = os.WriteFile(outputFile, []byte(lowResult), 0o644)
+	err = os.WriteFile(outputFile, []byte(apostResult), 0o644)
 	if err != nil {
 		fmt.Print("Error writting output file", err)
 		return
 	}
 }
+ 
