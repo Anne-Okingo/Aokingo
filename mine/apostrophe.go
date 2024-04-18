@@ -1,8 +1,6 @@
 package mine
 
-import (
-	"strings"
-)
+import "strings"
 
 func Apostrophe(str string) string {
 	str = strings.ReplaceAll(str, "' ", " '")
