@@ -1,24 +1,22 @@
 package mine
 
-import (
-	"unicode"
-)
+import "unicode"
 
 func Punc(str string) string {
-	sRunes := []rune(str)
+	runes := []rune(str)
 	var words []rune
-	for i, values := range sRunes {
-		if values != ' ' && i < len(sRunes) && !(unicode.IsDigit(values)) && !(unicode.IsLetter(values)) && values != '\'' {
-			if sRunes[i-1] == ' ' {
-				sRunes[i], sRunes[i-1] = sRunes[i-1], sRunes[i] 
+	for i := 0; i < len(runes); i++ {
+		if runes[i] != ' ' && i < len(runes) && !(unicode.IsDigit(runes[i])) && !(unicode.IsLetter(runes[i])) && runes[i] != '\'' {
+			if runes[i-1] == ' ' {
+				runes[i], runes[i-1] = runes[i-1], runes[i]
 			}
 		}
 	}
-	for i, chr := range sRunes {
-		if i < len(sRunes)-1 && chr == ' ' && sRunes[i-1] == ' ' {
+	for i, chr := range runes {
+	if i < len(runes) && chr == ' ' && runes[i-1] == ' ' {
 			continue
 		}
-		words = append(words, sRunes[i])
+		words = append(words, runes[i])
 	}
 	return string(words)
 }

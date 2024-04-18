@@ -6,19 +6,20 @@ import (
 )
 
 func Cap(str string) string {
-	words := strings.Split(str, " ")
-	for i := 0; i < len(words); i++ {
-		if strings.Contains(words[i], "(cap") {
-			if strings.Contains(words[i], "(cap,") {
-				num, _ := strconv.Atoi(words[i+1][:len(words[i+1])-1])
-				for j := i - num; j < i; j++ {
-					words[j] = strings.Title(words[j])
+	content := strings.Split(str, " ")
+	for i := 0; i < len(content); i++ {
+		if strings.Contains(content[i], "(cap") {
+			if strings.Contains(content[i], "(cap,") {
+				numb, _ := strconv.Atoi(content[i+1][:len(content[i+1])-1])
+				for j := i - numb; j < i; j++ {
+					content[j] = strings.ToUpper(string(content[j][0])) + strings.ToLower(string(content[j][1:]))
 				}
-				words = append(words[:i], words[i+2:]...)
+				content = append(content[:i], content[i+2:]...)
+			} else {
+				content[i-1] = strings.ToUpper(string(content[i-1][0])) + strings.ToLower(string(content[i-1][1:]))
+				content = append(content[:i], content[i+1:]...)
 			}
-			words[i-1] = strings.Title(words[i-1])
-			words = append(words[:i], words[i+1:]...)
 		}
 	}
-	return strings.Join(words, " ")
+	return strings.Join(content, " ")
 }

@@ -20,7 +20,7 @@ func main() {
 
 	// convert the content to string
 	filecontent := string(content)
-	// to modify out input text
+	// to modify input text
 
 	capResult := mine.Cap(filecontent)
 	atoanresult := mine.AToAn(capResult)
