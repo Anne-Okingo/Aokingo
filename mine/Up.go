@@ -3,6 +3,7 @@ package mine
 import (
 	"strconv"
 	"strings"
+	"fmt"
 )
 
 func Up(s string) string {
@@ -10,7 +11,10 @@ func Up(s string) string {
 	for i := 0; i < len(words); i++ {
 		if strings.Contains(words[i], "(up") {
 			if strings.Contains(words[i], "(up,") {
-				number, _ := strconv.Atoi(words[i+1][:len(words[i+1])-1])
+				number, err := strconv.Atoi(words[i+1][:len(words[i+1])-1])
+				if err != nil || number > i {
+					fmt.Printf("Error at conversion '%v' or cap '%v' is out of range.", err, number)
+				}
 				for j := i - number; j < i; j++ {
 					words[j] = strings.ToUpper(words[j])
 				}

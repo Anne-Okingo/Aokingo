@@ -8,10 +8,14 @@ import (
 )
 
 func main() {
-	inputfile := "sample.txt"
-	outputFile := "result.txt"
+	inputFile := os.Args[1]
+	outputFile := os.Args[2]
+
+	//if len(os.Args) != 3 {
+		//fmt.Println("Usage Should Be : go run . ", inputFile, outputFile )
+	// }
 	// reading our inputfile
-	content, err := os.ReadFile(inputfile)
+	content, err := os.ReadFile(inputFile)
 	// handling errors
 	if err != nil {
 		fmt.Println("Error File", err)
