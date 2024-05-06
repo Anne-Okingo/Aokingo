@@ -1,29 +1,45 @@
 package mine
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 func Cap(str string) string {
-	content := strings.Split(str, " ")
-	for i := 0; i < len(content); i++ {
-		if strings.Contains(content[i], "(cap") {
-			if strings.Contains(content[i], "(cap,") {
-				numb, err:= strconv.Atoi(content[i+1][:len(content[i+1])-1])
-				if err != nil || numb > i {
-					fmt.Printf("Error at conversion '%v' or cap '%v' is out of range.", err, numb)
+	// First Split the string using a space
+	words := strings.Split(str, " ")
+	for i := 0; i < len(words); i++ {
+		// Check if the words contains "(cap", while at it also check for "(cap,"
+		if strings.Contains(words[i], "(cap") {
+			if strings.Contains(words[i], "(cap,") {
+				// Now initialize a variable to store the number that will be converted from a string to an integer
+				num, err := strconv.Atoi(words[i+1][:len(words[i+1])-1])
+				if err != nil {
+					fmt.Println("Error in Conversion", err)
 				}
-				for j := i - numb; j < i; j++ {
-					content[j] = strings.ToUpper(string(content[j][0])) + strings.ToLower(string(content[j][1:]))
+				// A contition that will only run if the number is less than or equal to the words from the begining upto i but not including i
+				if num <= len(words[:i]) {
+				for j := i - num; j < i; j++ {
+					// only capitalize words at j the first letter while the rest remain lower case
+					words[j] = strings.ToUpper(string(words[j][0])) + strings.ToLower(string(words[j][1:]))
 				}
-				content = append(content[:i], content[i+2:]...)
+				// Now append the words eliminating the i
+				words = append(words[:i], words[i+2:]...)
+				// another condition that checks if the number is greater than the words from the begining upto i but not including i
+			} else if num > len(words[:i]) {
+				for r := 0; r < len(words[:i]); r++ {
+					words[r] = strings.ToUpper(string(words[r][0])) + strings.ToLower(string(words[r][1:]))
+				}
+				words = append(words[:i], words[i+2:]...)
+			}
+			// now handle the instance of "cap"
 			} else {
-				content[i-1] = strings.ToUpper(string(content[i-1][0])) + strings.ToLower(string(content[i-1][1:]))
-				content = append(content[:i], content[i+1:]...)
+				words[i-1] = strings.ToUpper(string(words[i-1][0])) + strings.ToLower(string(words[i-1][1:]))
+				words = append(words[:i], words[i+1:]...)
 			}
 		}
 	}
-	return strings.Join(content, " ")
+	// return the words joined together with a space
+	return strings.Join(words, " ")
 }

@@ -1,9 +1,9 @@
 package mine
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 func Up(s string) string {
