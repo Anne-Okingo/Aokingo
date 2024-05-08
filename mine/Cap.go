@@ -10,9 +10,9 @@ func Cap(str string) string {
 	// First Split the string using a space
 	words := strings.Split(str, " ")
 	for i := 0; i < len(words); i++ {
-		// Check if the words contains "(cap", while at it also check for "(cap,"
-		if strings.Contains(words[i], "(cap") {
-			if strings.Contains(words[i], "(cap,") {
+		// Check if the words contains all variations of the word "(cap", while at it also check for all variations of "(cap,"
+		if strings.Contains(words[i], "(cap") || strings.Contains(words[i], "(Cap") || strings.Contains(words[i], "(CAP") || strings.Contains(words[i], "(cAP") || strings.Contains(words[i], "(caP") || strings.Contains(words[i], "(cAP") || strings.Contains(words[i], "(CaP"){
+			if strings.Contains(words[i], "(cap,") || strings.Contains(words[i], "(Cap,") || strings.Contains(words[i], "(CAP,") || strings.Contains(words[i], "(cAP,") || strings.Contains(words[i], "(caP,") || strings.Contains(words[i], "(cAP,") || strings.Contains(words[i], "(CaP"){
 				// Now initialize a variable to store the number that will be converted from a string to an integer
 				num, err := strconv.Atoi(words[i+1][:len(words[i+1])-1])
 				if err != nil {
