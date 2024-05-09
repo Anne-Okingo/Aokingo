@@ -6,12 +6,12 @@ import (
 )
 
 func TestLow(t *testing.T) {
-	sample := "Alice has TWO (low) KENYAN SHILLING (low, 2) in her bag."
-	expected := "Alice has two kenyan shilling in her bag."
+	sample := "ALICE HAS A BRIGHT (low, 2) FUTURE (low)"
+	expected := "ALICE HAS a bright future"
 
 	result := Low(sample)
 
 	if !reflect.DeepEqual(result, expected) {
-		t.Errorf("Test Low failed. Expected: %v. Got: %v", expected, result)
+		t.Errorf("Test Low Failed Expected : %v. Got : %v .", expected, result)
 	}
 }
